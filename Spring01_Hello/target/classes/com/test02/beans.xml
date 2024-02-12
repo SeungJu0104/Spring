@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- <bean id="객체명" class="클래스명"></bean> -->
+	<bean id="korean" class="com.test02.MessageBeanKo"></bean><!-- 설정대로 DI에 따라 자동으로 객체(bean) 생성 -->
+	<bean id="english" class = "com.test02.MessageBeanEn"></bean>
+</beans>
