@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	
+	<bean id="kim" class="com.test03.Emp">
+		<property name="name" value="김창진"/>
+		<property name="salary" value="300"/>
+	</bean>
+	
+	<bean id="leecj" class="com.test03.Developer">
+		<constructor-arg index="0" ref="lee" />
+		<!-- ref="id명" 하면 해당 id를 갖고있는 bean을 참조한다. -->
+		<constructor-arg index="1" value="개발"/>
+	</bean>
+	
+	<bean id="lee" class="com.test03.Emp">
+		<constructor-arg name="name" value="이창진"/>
+		<constructor-arg name="salary" value="200"/>
+	</bean>
+	
+	<bean id="kimcj" class="com.test03.Enginner">
+		<constructor-arg name="emp" ref="kim"/>
+		<!-- ref="id명" 하면 해당 id를 갖고있는 bean을 참조한다. -->
+		<constructor-arg name="dept" value="기술"/>
+	</bean>
+
+</beans>

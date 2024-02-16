@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- lazy loading : getBean으로 호출 할 때 bean을 만든다. 
+		 원래는 xml 문서를 읽어들일 때, bean을 생성하는데 나중에 getBean할 때 bean을 생성해 자원 낭비를 막는다.
+		 (xml 문서 읽어서 바로 만들면 안쓰는 bean도 생성되니까) -->
+	<!-- lazy-init="true" 하면 getBean할 때 해당 bean을 생성한다. -->
+	<bean id="samsung" class="com.test05.SamsungTV" lazy-init="true"/>
+	<bean id="lg" class="com.test05.LGTV" />
+
+</beans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="factory" class="com.test01.AbstractTest" factory-method="getInstance"></bean>
+	<!-- factory-method를 이용해 다형성을 이용한 하위 클래스의 객체를 가져다 쓸 수 있다. -->
+	<!-- factory-method의 결과로 나온 객체를 가져다 쓸 수 있다. -->
+	<!-- getInstance 메소드에는 상황에 따라 추상 클래스의 하위 클래스의 객체를 리턴해주는 코드가 짜져있다. -->
+	<!-- 결론적으로, 오늘 날짜의 요일에 맞는 객체가 생성되어 MTest 클래스에서 사용된다. -->
+	<!-- factory-method가 리턴해주는 객체를 사용한다. -->
+	<!-- 이러한 방식을 factory-method 패턴(factory 디자인 패턴)이라고 한다. -->
+
+</beans>

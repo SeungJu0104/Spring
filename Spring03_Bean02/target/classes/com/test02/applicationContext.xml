@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="lee" class="com.test02.Emp">
+		<constructor-arg name="name" value="이창진"></constructor-arg>
+		<constructor-arg name="salary" value="2000000" />
+	</bean>
+	
+	<bean id="kim" class="com.test02.Emp">
+		<property name="Name"><value>김창진</value></property>
+		<!-- setter 메소드로 DI할 경우, name의 첫번째 글자는 대소문자 아무거나 상관없다.
+			 왜냐하면, 보통 setter 메소드명의 set 뒤에는 보통 필드명이 붙는데 첫글자는 대문자로 쓰기 때문이다. -->
+		<property name="salary" value="3000000"/>
+	</bean>
+	<!-- 따로 property나 constructor-args가 없었다면 Emp 객체명 = new Emp(); 형태로 객체 생성 -->
+	
+	<bean id="park" class="com.test02.Developer">
+		<constructor-arg index="0" value="박창진"/>
+		<constructor-arg index="1" value="4000000"/>
+		<property name="Dept" value="개발"/>
+	</bean>
+	<!-- 생성자와 setter 메소드를 모두 활용한 DI 생성도 가능하다. -->
+	
+	<bean id="cho" class="com.test02.Enginner">
+		<constructor-arg name="name" value="조창진"/>
+		<constructor-arg name="salary"><value>3500000</value></constructor-arg>
+		<property name="dept"><value>기술</value></property>
+	</bean>
+
+</beans>
