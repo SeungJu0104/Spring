@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="favoriteFood" class="com.test02.Food">
+		<constructor-arg index="0" value="삼겹살"/>
+		<constructor-arg index="1" value="2750"/>	
+	</bean>
+	
+	<bean id="unFavoriteFood" class="com.test02.Food">
+		<property name="name" value="당근"/>
+		<property name="price" value="300"/>
+	</bean>
+	
+	<bean id="myFood" class="com.test02.MyFood" autowire="byName"/>
+	<!-- 
+	autowire="byName 또는 constructor 또는 byType"
+	byName : setter 메소드의 set 뒷 부분(일반적으로 필드명)과 같은 id(name)의 bean이 자동 할당.
+	constructor : 생성자의 파라미터와 같은 id(name)의 bean이 자동 할당.
+	byType : 생성된 bean들 중 setter의 파라미터 타입과 비교해 맞는 타입을 자동 할당.
+	(동일 타입이 여러개면 에러 발생)
+	 -->
+	
+</beans>

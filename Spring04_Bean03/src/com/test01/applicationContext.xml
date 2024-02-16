@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="myClass" class="com.test01.MyClass" />
+	<bean id="date" class="java.util.Date" />
+	<!-- <bean id="beanTest" class="com.test01.BeanTest" c:date-ref="date" p:MyClass-ref="myClass" p:Date-ref="date" p:number="5" lazy-init="true"/> -->
+	<!-- lazy loading을 위해 lazy-init="true"로 설정해 getBean 실행할 때, bean이 만들어지도록 한다. -->
+	
+	<!-- id가 beanTest인 BeanTest 클래스 bean 생성 -->
+	<bean id="beanTest" class="com.test01.BeanTest" lazy-init="true">
+		<!-- public BeanTest(Date date) 호출 -->
+		<constructor-arg name="date" ref="date"/>
+		<!-- public void setMyClass(MyClass myClass) 호출 -->
+		<property name="myClass" ref="myClass"/>
+		<!-- public void setDate(Date date) 호출 -->
+		<property name="date" ref="date"/>
+		<!-- public void setNumber(int number) 호출 -->
+		<property name="number" value="5"/>
+		<!-- public void setArray(String [] arr) 호출 -->
+		<property name="array">
+			<array>
+				<value>이창진</value>
+				<value>김창진</value>
+				<value>박창진</value>
+			</array>
+		</property>
+		<!-- public void setList(List <String> list) 호출 -->
+		<property name="List">
+			<list>
+				<value>봄</value>
+				<value>여름</value>
+				<value>가을</value>
+				<value>겨울</value>
+			</list>
+		</property>
+		<!-- public void setMap(Map <String, String> map) 호출 -->
+		<property name="map">
+			<map>
+				<entry> <!-- Map에서 key와 value를 묶은 한 쌍을 entry라고 한다. -->
+					<key><value>1</value></key>
+					<value>봄</value>
+				</entry>
+				<entry key="2" value="여름"/>
+				<entry key="3" value="가을"/>
+				<entry>
+					<key><value>4</value></key>
+					<value>겨울</value>
+				</entry>
+			</map>
+		</property>
+		<!-- public void setScore(List <Score> list) 호출 -->
+		<property name="score">
+			<list>
+				<!-- Score 객체를 직접 생성 -->
+				<bean class="com.test01.Score">
+					<!-- 매개변수 생성자 -->
+					<property name="name" value="이창진"/>
+					<property name="point" value="99"/>
+				</bean>
+				<!-- 외부의 Score 객체(bean)을 추가 -->
+				<ref bean="score"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="score" class="com.test01.Score">
+		<constructor-arg value="김창진"/>
+		<constructor-arg value="88"/>
+	</bean>
+
+</beans>
