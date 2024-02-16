@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 매개변수 생성자 DI -->
+	<!-- 매개변수 생성자는 constructor-arg 태그를 이용한다. -->
+	<bean id="kim" class="com.test02.Address">
+		<!-- 
+		<constructor-arg name="매개변수명" value="값"/>
+		<constructor-arg value="값"/>
+		<constructor-arg index="매개변수 위치" value="값"/>
+		 -->
+		<constructor-arg name="name" value="김창진"/>
+		<constructor-arg name="addr" value="서울시 광진구"/>
+		<constructor-arg name="phone" value="010-4578-1234"/>
+	</bean>
+	
+	<!-- setter DI -->
+	<!-- setter는 property라는 태그를 이용한다. -->
+	<bean id="park" class="com.test02.Address">
+		<!-- <property name="setter 메소드명에서 set뒤에 붙는 이름" -->
+		<!-- 일반적으로 setter 메소드명은 set뒤에 필드명이 붙기 때문에 그냥 필드명이라 생각하고 써도 큰 문제는 없지만,
+			 간혹 가다 아닌 경우에는 반드시 set뒤에 붙는 이름을 사용해야한다. -->
+		<!-- 일반적으로 setter 메소드명의 set 뒤에 붙는 이름은 보통 첫글자가 대문자이기때문에,
+			 property 속성 name에도 첫글자는 대문자쓰든 소문자 쓰든 잘 찾는다.-->
+		<!-- property 속성 name은 대소문자 구별한다. 예를 들어, 아래 name을 ADDR이라하면 에러 발생한다. -->
+		<!-- 매개변수 생성자와 다르게 반드시 값을 다 채울 필요는 없다. -->
+		<property name="nm" value="박창진"></property>
+		<property name="Addr" value="경기도 수원시"></property>
+		<property name="phone" value="010-7890-1234"></property>
+		
+	</bean>
+	
+</beans>

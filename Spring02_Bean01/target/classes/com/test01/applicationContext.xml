@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 기본 생성자 -->
+	<bean id="banana" class="com.test01.MessageBeanImpl"></bean>
+	<!-- bean은 xml 파일을 읽어들일 때 생성된다. -->
+	
+	<!-- 매개변수 생성자 -->
+	<bean id="apple" class="com.test01.MessageBeanImpl">
+		<constructor-arg>
+			<value>apple</value>
+		</constructor-arg><!-- 매개변수 1개 -->
+		<!-- <constructor-arg name="apple"></constructor-arg> 과 동일하다. -->
+		<constructor-arg value="10000"></constructor-arg><!-- 매개변수 1개 -->
+	</bean>
+	<bean id="mango" class="com.test01.MessageBeanImpl">
+		<constructor-arg index="1" value="15000"/>
+		<!--
+		<constructor-arg index="1">
+			<value>15000</value>
+		</constructor-arg>
+		도 가능하다.
+		-->
+		<constructor-arg value="mango"/>
+		<!-- 별도로 constructor-arg 태그에 표현이 없다면 기본적으로 생성자 매개변수 순서대로 들어간다. -->
+		<!-- index 속성 이용해 매개변수 인덱스 지정 가능하다. -->
+		<!-- 여기선 매개변수가 2개이기 때문에 하나만 index 잡아주면 나머지 하나는 자동으로 빈 index에 넣어준다.
+			 다만, 정확히 하려면 전부 다 매개변수 index 적어주는게 좋다. -->
+	</bean>
+
+</beans>
