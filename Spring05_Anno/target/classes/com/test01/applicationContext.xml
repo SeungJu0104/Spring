@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="nickName" class="com.test01.NickName"/>
+	<!-- 스프링에서 객체는 bean이다. -->
+	
+	<bean id="myNickName" class="com.test01.MyNickNamePrn" p:nickName-ref="nickName"/>
+	<!-- setter 메소드의 매개변수로 NickName 객체를 받으므로, NickName 객체(bean)인 nickName을 참조(ref)한다.  -->
+
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- Annotation으로 작성한 bean과 xml에 직접 작성한 bean을 같이 사용할 수 있다. -->
+	<!-- <context:component-scan base-package="com.test02"/>  -->
+	<!-- 또는 -->
+	<context:annotation-config/>
+	
+	<bean id="lee" class="com.test02.Student">
+		<constructor-arg index="0" value="이창진"/>
+		<constructor-arg index="1" value="서울시 광진구"/>
+		<constructor-arg index="2" value="25"/>
+	</bean>
+	
+	  
+	<bean id="kim" class="com.test02.Student">
+		<constructor-arg index="0" value="김창진"/>
+		<constructor-arg index="1" value="서울시 노원구"/>
+		<constructor-arg index="2" value="30"/>
+	</bean>
+	<!--
+	기본적으로 @Autowired는 타입 기반으로 비교하기 때문에 동일 타입의 bean이 여러개면 여기선 에러 발생한다.
+	그래서 @Qualifier("bean id명") 를 사용하면 내가 원하는 bean을 갖고올 수 있다.
+	(import 필요 org.springframework.beans.factory.annotation.Qualifier)
+	(단, @Qualifier를 여러개 쓸 수는 없다.)
+	-->
+	
+	<bean id="mySchool" class="com.test02.School">
+		<property name="grade" value="2"/>
+	</bean>
+
+</beans>

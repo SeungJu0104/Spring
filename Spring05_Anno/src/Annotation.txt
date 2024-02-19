@@ -1,0 +1,52 @@
+Bean 생성하는 DI 관련 주요 Annotation
+
+1. Component
+: @Component
+: 클래스에 선언
+: 해당 클래스를 자동으로 bean으로 등록
+: 객체명(bean의 id)는 첫 글자가 소문자인 해당 클래스명이 된다.
+
+2. Autowired
+: @Autowired
+: 스프링에서 의존관계를 자동으로 설정해준다.
+: 타입을 비교해 property 자동 설정
+: 해당 타입의 bean이 없거나 2개 이상일 경우 예외 발생
+(단, required=false 설정해주면, 해당 타입의 bean이 없으면 그냥 넘기도록 할 수 있다.)
+(기본적으로는 required=true 설정되어 있다.)
+(해당 타입의 bean이 2개 이상 존재할 경우, @Qualifier("bean id명")을 사용해 특정 bean을 지정해서 해결할 수 있다.)
+(단, @Qualifier는 여러개 사용할 수 없다.)
+
+ex)
+@Autowired
+@Qualifier("test")
+private Test test;
+
+3. Qualifier
+: @Qualifier("bean id명");
+: @Autowired와 함께 사용한다.
+: 2개 이상의 동일한 타입의 bean이 존재하면 특정 bean을 사용할 수 있도록 정해준다.
+
+4. Required
+: @Required
+: 필수 property를 명시한다. setter에 붙여서 사용한다.
+
+5. Repository
+: @Repository
+: Dao임을 인식시킨다.
+: 발생되는 Exception을 DatatAccessException 타입으로 변환해준다.
+
+6. Service
+: @Service
+: 해당 Annotaion을 적용한 클래스는 비즈니스 로직 단(biz 또는 service)으로 등록된다.
+(트랜잭션 관리. Model에서 biz <-> dao <-> db)
+
+7. Controller
+: @Controller
+: 해당 Annotation을 적용한 클래스는 컨트롤러 단으로 등록된다.
+
+Annotation을 설정해주는 태그들
+1. <context:annotation-config/>
+2. <context:annotation-scan base-package="탐색할 패키지 위치"/>
+: bean 관련 annotation 처리에 주로 사용
+3. <mvc:annotation-driven/> 
+: mvc와 관련된 annotation 처리에 주로 사용
