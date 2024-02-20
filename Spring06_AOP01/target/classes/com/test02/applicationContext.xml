@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- classWork 메소드 실행하기 위한 Man, Woman 객체 생성 -->
+	<bean id="man" class="com.test02.Man"/>
+	<!-- Man man = new Man(); -->
+	<bean id="woman" class="com.test02.Woman"/>
+	<!-- Woman woman = new Woman(); -->
+	
+	<!-- AOP 설정 -->
+	<!-- 공통부(CCC) 객체 생성 -->
+	<bean id="myAdvice" class="com.test02.MyAspect"/>
+	<!-- MyAspect myAdvice = new MyAspect(); -->
+	
+	<!-- Proxy 객체 생성 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+	
+	<!-- advisor(aspect) : advice + pointcut -->
+	<bean id="myAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+		<property name="advice" ref="myAdvice"/>
+		<!-- 공통부 객체를 advice로 넣는다. -->
+		<property name="expression" value="execution(public * *(..))"/>
+		<!-- public 모든 리턴타입 모든 메소드명(모든 매개변수) 형태의 메소드를 호출할 때, advice를 실행시킨다. -->
+		<!-- pointcut -->
+	</bean>
+	<!--
+	AspectJExpressionPointcutAdvisor myAdvisor = new AspectJExpressionPointcutAdvisor();
+	myAdvisor.setAdvice(MyAspect myAdvice);
+	myAdvisor.setExpression("execution(public * *(..))");
+	public 모든 리턴타입 모든 메소드명(모든 매개변수) 형태의 메소드를 호출한다.
+	myAspect 클래스에는 이를 만족하는 invoke 메소드가 있다.
+	 -->
+	
+</beans>

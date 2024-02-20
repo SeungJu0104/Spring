@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<aop:aspectj-autoproxy/>
+	<!-- proxy 설정 -->
+	<!-- Namespaces에서 aop 먼저 설정 필요 -->
+	<!-- aop:와 aspectj사이에 띄어쓰기 X -->
+	<context:component-scan base-package="com.test06"/>
+	<!-- Namespaces에서 context 먼저 설정 필요 -->
+	<!-- context:와 component사이에 띄어쓰기 X -->
+
+</beans>
