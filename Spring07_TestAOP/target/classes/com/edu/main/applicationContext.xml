@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- width 3 height 5 -->
+	<bean id="rect" class="com.edu.entity.Rectangle" c:title="사각형" c:width="3" c:height="5"/>
+	<!-- Rectangle rect = new Rectangle("사각형", 3, 5); -->
+	<bean id="tri" class="com.edu.entity.Triangle" p:title="삼각형" p:width="3" p:height="5"/>
+	<!-- 
+	Triangle tri = new Triangle();
+	tri.setTitle("삼각형");
+	
+	 -->
+	<bean id="aspect" class="com.edu.aop.MyAspect"/>
+	<!-- MyAspect aspect = new MyAspect(); -->
+
+	<aop:config>
+		<aop:pointcut expression="execution(* viewSize())" id="viewPoint"/>
+		<!-- 'viewSize라는 메소드명을 가진 매개변수 없는 메소드를 실행 시'라는 pointcut 설정. id는 viewpoint -->
+		<aop:aspect ref="aspect"><!-- advice 메소드들 있는 aspect 클래스의 객체를 참조시킨다. -->
+			<aop:before method="before" pointcut-ref="viewpoint"/>
+			<!-- id를 viewpoint로 설정한 pointcut을 참조해 before라는 advice 메소드를 실행한다. -->
+			<!-- <aop:before method="before" pointcut="execution(public void com.edu.entity.*.viewSize())"/> 도 가능하다.-->
+			<aop:after method="after" pointcut-ref="viewpoint"/>
+			<!-- id를 viewpoint로 설정한 pointcut을 참조해 성공여부와 관계없이 after라는 advice 메소드를 실행한다. -->
+		</aop:aspect>
+	</aop:config>
+
+	<!-- Annotation 이용한 aop 한번 만들어보기. bean도 Annotation으로 작성 -->
+	
+	
+</beans>
