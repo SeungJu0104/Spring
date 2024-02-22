@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 
+		Dispatcher Servlet은 요청을 받아서 HandlerMapping(@RequestMapping(value="/url패턴명", method=메소드명.GET)에 넘겨 매핑된 컨트롤러로 넘기고,
+		컨트롤러가 리턴한 결과를 view에 전달해 응답 받아서 다시 클라이언트한테 넘겨준다.
+		 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+		<!-- .do형태로 앞에 어떤 것이 오든 끝이 .do면 다 받아들인다. -->
+		<!-- / 안썼다. 주의! -->
+	</servlet-mapping>
+	
+	<!-- 필터 설정 -->
+	<!-- 필터는 클라이언트와 DispatcherServlet 사이에서 동작한다. -->
+	<!-- 모든 파일에 UTF-8 인코딩 설정  -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<!-- encoding이라는 파리미터를 UTF-8로 초기화한다. -->
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<!-- forceEncoding이라는 파라미터를 true로 초기화 -->
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<!-- filter 태그에서 이 filter-name과 동일한 것을 찾는다. -->
+		<url-pattern>/*</url-pattern>
+		<!-- /* 했으므로 모든 요청은 필터 거쳐간다. -->
+	</filter-mapping>
+	<!-- 이렇게 필터 설정하면 각 jsp마다 따로 UTF-8 인코딩 설정할 필요 없다. -->
+</web-app>

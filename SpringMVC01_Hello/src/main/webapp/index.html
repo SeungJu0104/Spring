@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+</head>
+<body>
+	<a href="home.do">home</a>
+	<!-- DispatcherServlet이 제일 먼저 요청을 받을 것이다. -->
+	<!-- workspace 위치 경로에 한글 들어가면 에러 날 수도 있으니까 조심하기 -->
+	<br>
+	<h2><a href="command.do?name=spring&addr=서울&phone=010-1234-5678">getCommand</a></h2>
+	<!-- GET 방식 -->
+	<br>
+	<form action="command.do" method="post">
+	<!-- POST 방식 -->
+		<table>
+			<tr>
+				<th>name</th>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<th>addr</th>
+				<td><input type="text" name="addr"></td>
+			</tr>
+			<tr>
+				<th>phone</th>
+				<td><input type="text" name="phone"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="postCommand"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
