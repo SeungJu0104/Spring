@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	
+	<!-- db.properties 불러온다. -->
+	<!-- 그러기위해서 bean을 생성해야한다. -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:mybatis/db.properties</value>
+				<!-- db.properties 의 위치를 알려준다. -->
+			</list>
+		</property>
+	</bean>
+	
+	<!-- dataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<!-- dataSource라 불리는 Connection 객체를 만든다. -->
+	<!-- db.properties에서 EL이용해 값을 갖고 온다. -->
+		<property name="driverClassName" value="${driver}"/>
+		<property name="url" value="${url}"/>
+		<property name="username" value="${username}"/>
+		<property name="password" value="${password}"/>
+	</bean>
+	
+	<!-- sqlsessionbuilder 통해서 sqlsessionfactory를 만들고, factory를 통해 sqlsession을 생성한다. -->
+	<!-- mybatis -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<!-- dataSource bean을 참조해 factory 생성에 필요한 property 값을 갖고온다. -->
+		<property name="configLocation" value="WEB-INF/spring/sqls/config.xml"></property>
+		<!-- mybatis 설정값 들어간 config.xml 파일 읽어서 mybatis 동작한다. -->
+	</bean>
+	
+	<!-- mybatis에서 쓸 객체를 생성. 앞의 과정은 모두 이 객체를 만들기위한 과정이다. -->
+	<!-- 이전에는 Connection 객체만 갖고 데이터 처리했지만, 이제는 Connection 객체를 가지고 myBatis로 데이터 처리한다. -->
+	<!-- sqlSessionTemplate 객체가 Connection 객체를 가지고 데이터를 처리해줄 것이다. -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
+	
+</beans>

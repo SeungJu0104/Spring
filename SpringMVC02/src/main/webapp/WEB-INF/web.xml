@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<!-- 톰캣 시작하면 web.xml을 먼저 읽는다. -->
+	
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+	<!-- 전역 변수 개념 -->
+	<!-- root-context 파일을 이름바꾸고 위치 변경했으니, root-context 파일 위치 담은 파리미터를 우리가 변경한대로 재작성한다. -->
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/appServlet/applicationContext.xml</param-value>
+	</context-param>
+	<!-- 시작하면 applicationContext.xml 파일을 톰캣이 읽어들인다. -->
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+		<!-- 지역 변수 개념 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<!-- applicationContext.xml 읽고나서, servlet-context.xml을 읽는다. -->
+	
+	<!-- 필터 설정 -->
+	<!-- 필터는 클라이언트와 DispatcherServlet 사이에서 동작한다. -->
+	<!-- 모든 파일에 UTF-8 인코딩 설정  -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<!-- encoding이라는 파리미터를 UTF-8로 초기화한다. -->
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<!-- forceEncoding이라는 파라미터를 true로 초기화 -->
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<!-- filter 태그에서 이 filter-name과 동일한 것을 찾는다. -->
+		<url-pattern>/*</url-pattern>
+		<!-- /* 했으므로 모든 요청은 필터 거쳐간다. -->
+	</filter-mapping>
+	<!-- 이렇게 필터 설정하면 각 jsp마다 따로 UTF-8 인코딩 설정할 필요 없다. -->
+
+</web-app>

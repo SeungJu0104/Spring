@@ -1,0 +1,32 @@
+SpringMVC02 작성 순서
+
+1. pom.xml에 필요한 의존성(dependency) 추가
+: mysql connector j, mybatis, mybatis-spring, commons-dbcp, spring-orm
+
+2. web.xml에 코드 작성
+: root-context.xml 파일을 applicationContext.xml 파일로 파일명 변경
+(그동안 applicationContext라는 이름이 더 익숙하니까. 반드시 파일명 변경할 필요는 없다.)
+(appServlet 폴더로 applicationContext.xml 파일 옮긴다. 반드시 옮길 필요는 없다.)
+(그리고 변경했다면, context-param의 value를 변경 내용대로 변경하기)
+: DispatcherServlet 위한 mapping 설정
+: encoding 위한 filter 설정
+
+3. /WEB-INF/spring/sqls에 test.sql 작성
+(실습 시 실제 디비 생성은 디비버로 할거지만 내용 작성은 해놓는다.)
+(내용만 채워놓고 다른 파일 만들어서 디비버로 테이블 생성해도 상관없고, 저 파일 작성 후 가져다가 디비버에서 실행시켜도 상관없다.)
+(My SQL 연결 체크하기)
+
+4. DTO, DAO, BIZ, Controller 작성
+
+5. src/main/resources/mybatis에 board-mapper.xml 파일 작성
+: 쿼리를 저장
+
+6. src/main/resources/mybatis에 db.properties 파일 작성
+(키와 value로 구성되어있다.)
+(JDBC 연결위한 정보들을 작성한다.)
+
+7. /WEB-INF/spring/sqls에 config.xml 파일 작성
+: 설정을 저장
+(MyBatis를 쓰기위해서 config와 mapper가 필요하다.)
+
+8. applicationContext.xml 설정
