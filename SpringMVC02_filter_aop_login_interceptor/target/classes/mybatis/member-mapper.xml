@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 굳이 따지면 이 파일 안만들고, board-mapper.xml에 몰아서 처리해도 되지만, 나중에 에러 등 문제 생겼을 때 처리하기 쉽게 따로 작성한 것이다. -->
+
+<mapper namespace="mymember">
+	
+	<select id="login" parameterType="memberDto" resultType="memberDto">
+	<!-- parameterType 넘어온 파라미터 타입, resultType 돌려준 리턴 값 타입. memberDto는 config.xml에 설정한 별칭이다. -->
+		SELECT * FROM MYMEMBER WHERE MEMBERID=#{memberid} AND MEMBERPW=#{memberpw}
+	</select>
+	
+	
+</mapper>
