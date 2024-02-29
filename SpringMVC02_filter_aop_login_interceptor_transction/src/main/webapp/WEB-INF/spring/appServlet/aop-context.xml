@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<bean id="logAop" class="com.mvc.upgrade.common.aop.LogAop"></bean>
+	<!-- LogAop의 객체(bean) 생성 -->
+	
+	<!-- pointcut 메소드 실행할 때마다 콘솔 창에 로그가 출력된다.(각 advice 메소드 내용이 로그 출력이니까) -->
+	<aop:config>
+		<aop:pointcut expression="execution(public * com.mvc.upgrade.model.dao.*Dao*.*(..))" id="daoPoint"/>
+		<!-- Dao가 붙은 모든 클래스명 내의 모든 메소드가 실행이 pointcut -->
+		<aop:aspect ref="logAop">
+			<aop:before method="before" pointcut-ref="daoPoint"/>
+			<!-- pointcut 실행 직전에 before라는 advice메소드를 실행 -->
+			<aop:after method="after" pointcut-ref="daoPoint"/>
+			<!-- pointcut 실행 후(메소드 성공 실패 관계없이)에 after라는 advice메소드를 실행 -->
+			<aop:after-throwing method="afterThrowing" pointcut-ref="daoPoint"/>
+			<!-- pointcut 실행 후 예외 발생한 경우에 afterThrowing이라는 advice메소드를 실행 -->
+		</aop:aspect>
+	</aop:config>
+
+</beans>
